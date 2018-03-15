@@ -1528,8 +1528,8 @@ var Select$1 = function (_React$Component) {
 						{
 							disabled: _this5.props.disabled || value.clearableValue === false,
 							id: _this5._instancePrefix + '-value-' + i,
+							index: i,
 							instancePrefix: _this5._instancePrefix,
-							key: 'value-' + i + '-' + value[_this5.props.valueKey],
 							onClick: onClick,
 							onRemove: _this5.removeValue,
 							placeholder: _this5.props.placeholder,
@@ -1871,6 +1871,7 @@ var Select$1 = function (_React$Component) {
 				);
 			}
 
+			var ValueListComponent = this.props.valueListComponent;
 			return React__default.createElement(
 				'div',
 				{ ref: function ref(_ref7) {
@@ -1893,7 +1894,7 @@ var Select$1 = function (_React$Component) {
 						style: this.props.style
 					},
 					React__default.createElement(
-						'span',
+						ValueListComponent,
 						{ className: 'Select-multi-value-wrapper', id: this._instancePrefix + '-value' },
 						this.renderValue(valueArray, isOpen),
 						this.renderInput(valueArray, focusedOptionIndex)
@@ -1984,6 +1985,7 @@ Select$1.propTypes = {
 	trimFilter: PropTypes.bool, // whether to trim whitespace around filter value
 	value: PropTypes.any, // initial field value
 	valueComponent: PropTypes.func, // value component to render
+	valueListComponent: PropTypes.func,
 	valueKey: PropTypes.string, // path of the label value in option objects
 	valueRenderer: PropTypes.func, // valueRenderer: function (option) {}
 	wrapperStyle: PropTypes.object // optional style to apply to the component wrapper
@@ -2032,6 +2034,15 @@ Select$1.defaultProps = {
 	tabSelectsValue: true,
 	trimFilter: true,
 	valueComponent: Value,
+	valueListComponent: function valueListComponent(_ref8) {
+		var children = _ref8.children,
+		    rest = objectWithoutProperties(_ref8, ['children']);
+		return React__default.createElement(
+			'span',
+			rest,
+			children
+		);
+	},
 	valueKey: 'value'
 };
 
