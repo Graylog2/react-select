@@ -895,6 +895,10 @@ var Select$1 = function (_React$Component) {
 	}, {
 		key: 'handleMouseDown',
 		value: function handleMouseDown(event) {
+			var role = event.target && event.target.attributes ? event.target.attributes.role : undefined;
+			if (role && role.value === 'option') {
+				return;
+			}
 			// if the event was triggered by a mousedown and not the primary
 			// button, or if the component is disabled, ignore it.
 			if (this.props.disabled || event.type === 'mousedown' && event.button !== 0) {
