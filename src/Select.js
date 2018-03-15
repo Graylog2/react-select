@@ -821,8 +821,8 @@ class Select extends React.Component {
 					<ValueComponent
 						disabled={this.props.disabled || value.clearableValue === false}
 						id={`${this._instancePrefix}-value-${i}`}
+						index={i}
 						instancePrefix={this._instancePrefix}
-						key={`value-${i}-${value[this.props.valueKey]}`}
 						onClick={onClick}
 						onRemove={this.removeValue}
 						placeholder={this.props.placeholder}
@@ -1159,6 +1159,7 @@ class Select extends React.Component {
 			);
 		}
 
+		const ValueListComponent = this.props.valueListComponent;
 		return (
 			<div ref={ref => this.wrapper = ref}
 				 className={className}
@@ -1173,10 +1174,10 @@ class Select extends React.Component {
 					onTouchStart={this.handleTouchStart}
 					style={this.props.style}
 				>
-					<span className="Select-multi-value-wrapper" id={`${this._instancePrefix}-value`}>
+					<ValueListComponent className="Select-multi-value-wrapper" id={`${this._instancePrefix}-value`}>
 						{this.renderValue(valueArray, isOpen)}
 						{this.renderInput(valueArray, focusedOptionIndex)}
-					</span>
+					</ValueListComponent>
 					{removeMessage}
 					{this.renderLoading()}
 					{this.renderClear()}
@@ -1262,6 +1263,7 @@ Select.propTypes = {
 	trimFilter: PropTypes.bool,           // whether to trim whitespace around filter value
 	value: PropTypes.any,                 // initial field value
 	valueComponent: PropTypes.func,       // value component to render
+	valueListComponent: PropTypes.func,
 	valueKey: PropTypes.string,           // path of the label value in option objects
 	valueRenderer: PropTypes.func,        // valueRenderer: function (option) {}
 	wrapperStyle: PropTypes.object,       // optional style to apply to the component wrapper
@@ -1310,6 +1312,7 @@ Select.defaultProps = {
 	tabSelectsValue: true,
  	trimFilter: true,
 	valueComponent: Value,
+	valueListComponent: ({children, ...rest}) => <span {...rest}>{children}</span>,
 	valueKey: 'value',
 };
 
