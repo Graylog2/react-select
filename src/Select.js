@@ -823,6 +823,7 @@ class Select extends React.Component {
 			return valueArray.map((value, i) => {
 				return (
 					<ValueComponent
+						key={`${this._instancePrefix}-value-${i}`}
 						disabled={this.props.disabled || value.clearableValue === false}
 						id={`${this._instancePrefix}-value-${i}`}
 						index={i}
@@ -830,8 +831,7 @@ class Select extends React.Component {
 						onClick={onClick}
 						onRemove={this.removeValue}
 						placeholder={this.props.placeholder}
-						value={value}
-					>
+						value={value}>
 						{renderLabel(value, i)}
 						<span className="Select-aria-only">&nbsp;</span>
 					</ValueComponent>
