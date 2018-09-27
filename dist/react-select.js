@@ -1530,6 +1530,7 @@ var Select$1 = function (_React$Component) {
 					return React__default.createElement(
 						ValueComponent,
 						{
+							key: _this5._instancePrefix + '-value-' + i,
 							disabled: _this5.props.disabled || value.clearableValue === false,
 							id: _this5._instancePrefix + '-value-' + i,
 							index: i,
@@ -1537,8 +1538,7 @@ var Select$1 = function (_React$Component) {
 							onClick: onClick,
 							onRemove: _this5.removeValue,
 							placeholder: _this5.props.placeholder,
-							value: value
-						},
+							value: value },
 						renderLabel(value, i),
 						React__default.createElement(
 							'span',
